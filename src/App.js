@@ -1,10 +1,12 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
+import { Segment } from "semantic-ui-react";
 
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import About from "./components/About";
+import Page404 from "./components/Page404";
 
 const App = props => {
   const { history } = props;
@@ -13,8 +15,14 @@ const App = props => {
     <ConnectedRouter history={history}>
       <div>
         <NavBar />
-        <Route exact path="/" component={Home} />
-        <Route path="/About" component={About} />
+
+        <Segment>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/About" component={About} />
+            <Route component={Page404} />
+          </Switch>
+        </Segment>
       </div>
     </ConnectedRouter>
   );
